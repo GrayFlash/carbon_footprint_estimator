@@ -1,11 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset ="UTF-8">
+    <title> ALTER - Make a change </title>
+    <link rel="stylesheet" href="style.css">
+
+
+
+
 </head>
 <body>
+<section id="header">
+     <div class="topnav">
+  <a class="active" href="#home">Home</a>
+  <a href="news.html">News</a>
+  <a href="contact.html">Contact</a>
+  <a href="about.html">About</a>
+    </div>
     
+    <div class="container">
+        <img src="images/dark_logo_transparent.png" class="logo" style="margin:0px 50px">
+        <div class="header-text">
+            <h3> <b> MAKE A CHANGE</b></h3>
+            
+            
+            <br>
+            <p> A carbon footprint can be a broad measure or be applied to the actions of an individual, a family, an event, an organization, or even an entire nation.
+            </p>
+            <br>
+            <br>
+            <br>
+            <a href="about.html">
+            
+            <button type="button" href="about.html" class= "common-btn"> Read More </button>
+                
+            </a>
+            
+            
+            
+        </div>
+    </div>
+</section>
+   
+    
+    
+    
+    
+    
+    <!-- features -->
+    <section id="features">
+        
+             <div class="feature-col">
+            <img src="images/pic-1.png">
+            <h3> Connect with anyone.</h3>
+                 <p> Batchmates, seniors, juniors, Alumni etc. All at one place.</p>
+            </div>
+            
+            <div class="feature-col">
+                 <img src="images/pic-2.png">
+            <h3> Find the nerds for your events.</h3>
+                 <p> Batchmates, seniors, juniors, Alumni etc. All at one place.</p>
+            </div>
+             
+            <div class="feature-col">
+                 <img src="images/pic-3.png">
+            <h3> Unlimted excess</h3>
+                 <p> Batchmates, seniors, juniors, Alumni etc. All at one place. </p>
+            </div>
+                        
+            
+
+        
+    </section>
+    
+    
+    
+    <script>
+        var menuBtn = document.getElementById("menuBtn");
+        var sideNav = document.getElementById("sideNav");
+        
+        sideNav.style.right= "-250px";
+        menuBtn.onclick = function(){
+            if (sideNav.style.right == "-250px")
+                {
+                    sideNav.style.right= "0";
+                    
+                }
+            else {
+                sideNav.style.right= "-250px";
+            }
+        }
+    </script>
 </body>
+    
+
+
+
+
+
 </html>
