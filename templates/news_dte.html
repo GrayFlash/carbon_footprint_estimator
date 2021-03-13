@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block style %}
+    
+{% endblock %}
+{% block body %}
+    <h1>News Related to Climate Changes</h1>
+
+    <ul>
+        {% for news_block in news_list %}
+            <li>
+                <div class="img">
+                    <img src="{{ news_block['img'] }}">
+                </div>
+                <div class="details">
+                    <a href="{{ news_block['href'] }}">
+                        <h5>
+                            {{ news_block['title'] }}
+                        </h5>
+                    </a>
+                    <p>
+                        
+                        {{ news_block['descr'] }}
+                    </p>
+
+                    <div class="info">
+                        Posted on: 
+                        {{ news_block['date'] }}
+                    </div>
+                </div>
+            </li>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        {% endfor %}
+    </ul>
+{%endblock %}
