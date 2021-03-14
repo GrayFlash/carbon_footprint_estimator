@@ -1,8 +1,10 @@
+USE Blogs
+
 DROP TABLE IF EXISTS post;
 
 CREATE TABLE post (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    author_name TEXT NOT NULL DEFAULT 'Anonymous',
+    id INTEGER PRIMARY KEY,
+    author_name TEXT,
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     title TEXT NOT NULL,
     body TEXT NOT NULL
