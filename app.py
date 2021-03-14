@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from utils.dte_scraper import *
+from utils.blogs import *
 from flask import url_for
 
 # Configure application
@@ -24,3 +25,8 @@ def contact_us():
 def about():
     print("Move to about")
     return render_template('/about.html')
+    
+@app.route('/blogs',methods=['POST','GET'])
+def blogs():
+    blog_list = getblogs()
+    return render_template('/blogs.html' , blogs=blog_list)
