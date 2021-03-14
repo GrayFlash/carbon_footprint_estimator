@@ -9,26 +9,26 @@
         <a href="/about">About</a>
         <a class="active" href="/blogs">Blogs</a>
      </div>
+     <br/>
+     <a href='blog_create'>
+     <h2>Create Blog</h2>
+     </a>
+     <br/><br/>
   <div id="blogs_list">
     <ul>
         {% for blog in blogs %}
             <li>
                 <div class="details">
-                            
-                                <h3>
-                                    {{ blog[3] }}
-                                </h3>
-                            
-                            <p>
-                                
-                                {{ blog[4] }}
-                            </p>
-        
-                            <div class="date_posted">
-                                Posted on: 
-                                {{ blog[2] }}
-                            </div>
-                        </div>
+                  <a href="/blogs_read?id={{blog[0]}}"><h3>
+                    {{ blog[3] }}
+                  </h3></a>
+                    <p>                               
+                      Posted By: {{ blog[1] }}
+                    </p>
+                    <p>
+                         Posted on:  {{ blog[2] }}
+                    </p>
+                </div>
             </li>
         {% endfor %}
     </ul>

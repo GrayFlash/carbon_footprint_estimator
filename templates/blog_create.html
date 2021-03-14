@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<section id="header">
+     <div class="topnav">
+        <a href="/">Home</a>
+        <a href="/fetch_news">News</a>
+        <a href="/contact_us">Contact</a>
+        <a href="/about">About</a>
+        <a class="active" href="/blogs">Blogs</a>
+     </div>
+  <h2 id="blogs_title">
+    Create blog
+  </h2><br/><br/><br/>
+  <form action='/blogs' method='POST'>
+    <label for='author'>Author:</label> <input id='author' name='author'></input><br/><br/>
+    <label for='title'>Title:</label> <input id='title' name='title'></input><br/><br/>
+    <label for="body">Article:</label> <br/><center><textarea id='body' name='body' cols=150 rows=20></textarea></center><br/><br/>
+    <button type=submit>Submit</button>
+  </form>
+  <br/><br/><br/>
+  <div>
+    
+  </div>
+  
+</section>
+{% endblock %}

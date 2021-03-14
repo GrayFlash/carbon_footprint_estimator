@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<section id="header">
+     <div class="topnav">
+        <a href="/">Home</a>
+        <a href="/fetch_news">News</a>
+        <a href="/contact_us">Contact</a>
+        <a href="/about">About</a>
+        <a class="active" href="/blogs">Blogs</a>
+     </div>
+  <h2 id="blogs_title">
+    {{blog[3]}}
+  </h2>
+  <div>
+  <p>Author: {{blog[1]}}</p>
+  <p>Time: {{blog[2]}}</p>
+  </div>
+  <br/><br/><br/>
+  <div>
+    {{blog[4]}}
+  </div>
+  
+</section>
+{% endblock %}
