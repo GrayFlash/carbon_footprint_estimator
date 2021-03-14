@@ -10,6 +10,10 @@
 </head>
 <body>
     {% block body %}
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+    {%block blogcontent %}{% endblock %}
     {% endblock %}
 </body>
 </html>

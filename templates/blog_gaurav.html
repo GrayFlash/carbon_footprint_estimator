@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a href="/fetch_news">News</a>
+        <a href="/contact_us">Contact</a>
+        <a href="/about">About</a>
+        <a class="active" href="/blogs">About</a>
+    </div>
+    <hr>
+    {% block blogcontent %}
+        {% for post in posts %}
+            <article class="post">
+            <header>
+                <div>
+                <h1>{{ post['title'] }}</h1>
+                <div class="about">by {{ post['author_name'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
+                </div>
+            </header>
+            <p class="body">{{ post['body'] }}</p>
+            </article>
+                <hr>
+            {% endif %}
+        {% endfor %}
+    {% endblock %}
+{% endblock %}

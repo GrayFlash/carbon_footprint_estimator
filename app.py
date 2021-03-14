@@ -1,7 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, flash, request
 from utils.dte_scraper import *
 from utils.blogs import *
 from flask import url_for
+from utils.db import get_db
 
 # Configure application
 app = Flask(__name__)
@@ -30,3 +31,40 @@ def about():
 def blogs():
     blog_list = getblogs()
     return render_template('/blogs.html' , blogs=blog_list)
+
+@app.route('/blog', methods=['POST', 'GET'])
+def view_blog():
+    db = get_db()
+    posts = db.execute(
+        "SELECT id, title, body, created, author_name"
+        " ORDER BY created DESC"
+    ).fetchall()
+    return render_template('/blog_gaurav.html', posts=posts)
+
+
+@app.route('/create_blog', methods=['POST', 'GET'])
+def create_blog():
+    if request.method == "POST":
+        title = request.form["title"]
+        body = request.form["body"]
+        author_name = request.form["author_name"]
+        error = None
+
+        if not title:
+            error = "Title is required."
+        if not body:
+            error="Body is required"
+        if not author_name:
+            error = "No anonymous publication allowed"
+
+        if error is not None:
+            flash(error)
+        else:
+            db = get_db()
+            db.execute(
+                "INSERT INTO post (title, body, author_name) VALUES (?, ?)",
+                (title, body, author_name),
+            )
+            db.commit()
+            return redirect(url_for("index"))
+    return render_template('/create_blog.html')
