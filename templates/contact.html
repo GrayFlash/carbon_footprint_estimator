@@ -1,14 +1,194 @@
-{% extends "layout.html" %}
+<html lang="en">
 
-{% block body %}
-<section id="header">
-     <div class="topnav">
-        <a href="/">Home</a>
-        <a href="/fetch_news">News</a>
-        <a class="active" href="/contact_us">Contact</a>
-        <a href="/about">About</a>
-        <a href="/blogs">Blogs</a>
+<head>
+   <link rel= "stylesheet" href= "{{ url_for('static',filename='styles/style.css') }}">
+   <link rel= "stylesheet" href= "{{ url_for('static',filename='styles/form.css') }}">
+</head>
 
-     </div>
-</section>
-{% endblock %}
+<body>
+   <div class="topnav">
+      <a href="/">Home</a>
+      <a href="/fetch_news">News</a>
+      <a class="active" href="/contact_us">Contact</a>
+      <a href="/about">About</a>
+      <a href="/blogs">Blogs</a>
+  </div>
+
+  <br>
+  <br>
+  <br>
+<div class="main_box">
+<form >
+   <div class="country_selection">
+      <label for="countries">Preload the electricity generation stats by the country:</label>
+      <select id="countries" onchange="CountrySelected()" autofocus>
+         {% for country in con%}
+            <option value="{{ country }}">{{ country }}</option>
+         {% endfor %}
+      </select>
+   </div>
+    <br>
+
+
+    <br>
+   <div class="table">
+      <table id="inputTable" class="inputTable">
+         <tr>
+             <td><label for="coal%">Coal</label></td>
+             <td><input type="text" id="coal%" class="num" value="100" onkeyup="Calculate()"> %</td>
+             <td><input type="text" id="coalCO" class="num" value="820" onkeyup="Calculate()"> gCO<sub>2</sub>/kWh</td>
+         </tr>
+         <tr>
+             <td><label for="gas%">Natural gas</label></td>
+             <td><input type="text" id="gas%" class="num" value="0" onkeyup="Calculate()"> %</td>
+             <td><input type="text" id="gasCO" class="num" value="490" onkeyup="Calculate()"> gCO<sub>2</sub>/kWh</td>
+         </tr>
+         <tr>
+             <td><label for="oil%">Oil</label></td>
+             <td><input type="text" id="oil%" class="num" value="0" onkeyup="Calculate()"> %</td>
+             <td><input type="text" id="oilCO" class="num" value="778" onkeyup="Calculate()"> gCO<sub>2</sub>/kWh</td>
+         </tr>
+         <tr>
+             <td><label for="hydro%">Hydropower*</label></td>
+             <td><input type="text" id="hydro%" class="num" value="0" onkeyup="Calculate()"> %</td>
+             <td><input type="text" id="hydroCO" class="num" value="24" onkeyup="Calculate()"> gCO<sub>2</sub>/kWh</td>
+         </tr>
+         <tr>
+             <td><label for="renew%">Renewable**</label></td>
+             <td><input type="text" id="renew%" class="num" value="0" onkeyup="Calculate()"> %</td>
+             <td><input type="text" id="renewCO" class="num" value="41" onkeyup="Calculate()"> gCO<sub>2</sub>/kWh</td>
+         </tr>
+         <tr>
+             <td><label for="nuclear%">Nuclear</label></td>
+             <td><input type="text" id="nuclear%" class="num" value="0" onkeyup="Calculate()"> %</td>
+             <td><input type="text" id="nuclearCO" class="num" value="12" onkeyup="Calculate()"> gCO<sub>2</sub>/kWh</td>
+         </tr>
+         <tr>
+             <td><label for="custom%">Custom</label></td>
+             <td><input type="text" id="custom%" class="num" value="0" onkeyup="Calculate()"> %</td>
+             <td><input type="text" id="customCO" class="num" value="0" onkeyup="Calculate()"> gCO<sub>2</sub>/kWh</td>
+         </tr>
+ 
+     </table>
+   </div>
+    
+    <br>
+   <div class="percentage">
+      Total percentage: <span id="total%"></span>
+   </div>
+    <br>
+   <div class="inputPower">
+      <label for="power">How much power do you use (continuously)?</label>
+      <input type="text" id="power" value="1000" class="power" onkeyup="Calculate()">
+      <select id="powerUnit" onchange="Calculate()">
+          <option value="1000" id="W" selected>W</option>
+          <option value="1" id="kW">kW</option>
+          <option value="0.001" id="MW">MW</option>
+          <option value="0.000001" id="GW">GW</option>
+          <option value="0.000000001" id="TW">TW</option>
+      </select>
+   </div>
+    
+    <br>
+
+
+    <!--RESULTS-->
+    <div class="results">
+      You produce <b><span id="kgCO2result"></span></b> kg of CO<sub>2</sub> emissions per year.
+      <br>
+      You would need to plant <b><span id="treesRequired"></span></b> trees to eliminate your carbon footprint on our
+      planet.
+      <br>
+      You can donate <b><span id="priceRequired"></span>$</b> to <a href="https://trees.org">trees.org</a> to eliminate
+      your carbon footprint.
+  
+      <br>
+      <input type="reset">
+    </div>
+    
+
+</form>
+<div class="last_info">
+   *gCO<sub>2</sub> can vary widely, read Wiki page in Sources
+   <br>
+   **using gCO2 values for Solar PV rooftop, read Wiki page in Sources for other values
+   
+</div>
+
+<br>
+<button title="Click to show/hide content" type="button"
+        onclick="if(document.getElementById('spoiler').style.display==='none') {document.getElementById('spoiler').style.display=''}else{document.getElementById('spoiler').style.display='none'}">
+    Sources and notes
+</button>
+<div id="spoiler" class="source">
+    <fieldset class="fieldSet">
+        Electricity sources: <a href="http://wdi.worldbank.org/table/3.7">The World Bank statistics</a> (Data from 2015)
+        <br>
+        CO<sub>2</sub>/kWh values: Using median values from IPCC: Global warming potential of selected electricity
+        sources (2014)
+        <br>
+        CO<sub>2</sub>/kWh values may differ a lot, especially when power plants use newest (better values), or older
+        (worse values) technologies.
+        Check the <a href="https://en.wikipedia.org/wiki/Life-cycle_greenhouse-gas_emissions_of_energy_sources">Wikipedia
+        page</a> for Min/Max values.
+        <br>
+        This calculations assume that you use electricity proportionally from all power plants of your country.
+        <br>
+        If you know better where your electricity comes from (for example, you use your own solar power), edit the
+        settings accordingly.
+        <br>
+        One tree can eliminate 15.7 kg of CO<sub>2</sub> per year. Source: <a href="https://www.tfaforms.com/4666774">https://www.tfaforms.com/4666774</a>
+        <br>
+    </fieldset>
+</div>
+</div>
+<br>
+
+
+<script>
+   const byId = id => document.getElementById(id);
+   const rawData = {{ data|tojson }};
+
+let csvData = CSVParse();
+CountrySelected();
+Calculate();
+
+function CountrySelected()
+{
+    const country = byId("countries").value;
+    byId("coal%").value = (csvData[country]).Coal;
+	byId("gas%").value = (csvData[country]).Gas;
+	byId("oil%").value = (csvData[country]).Oil;
+	byId("hydro%").value = (csvData[country]).Hydro;
+	byId("renew%").value = (csvData[country]).Renewable;
+	byId("nuclear%").value = (csvData[country]).Nuclear;	
+	Calculate();
+}
+
+function Calculate()
+{
+	const e = byId("powerUnit");
+	const power = byId("power").value / e.options[e.selectedIndex].value;
+	
+	const totalPercentage = Number(byId("coal%").value) + Number(byId("gas%").value) + Number(byId("oil%").value) + Number(byId("hydro%").value) + Number(byId("renew%").value) + Number(byId("nuclear%").value) + Number(byId("custom%").value);
+	byId("total%").textContent = Math.round(totalPercentage*10)/10 + "%";
+	
+	const kgCO2result = ((byId("coal%").value * byId("coalCO").value + byId("gas%").value * byId("gasCO").value + byId("oil%").value * byId("oilCO").value +
+				  byId("hydro%").value * byId("hydroCO").value + byId("renew%").value * byId("renewCO").value + byId("nuclear%").value * byId("nuclearCO").value + 
+				  byId("custom%").value * byId("customCO").value) / 100000) * 24 * 365.2422 * power;
+	const treesRequired = kgCO2result / 15.7;
+
+	byId("kgCO2result").textContent = ((Math.ceil(kgCO2result)).toLocaleString('en')).replace(/,/g," ");
+	byId("treesRequired").textContent = ((Math.ceil(treesRequired)).toLocaleString('en')).replace(/,/g," ");
+	byId("priceRequired").textContent = ((Math.round(treesRequired / 10)).toLocaleString('en')).replace(/,/g," ");
+}
+
+function CSVParse()
+{
+   console.log(rawData)
+	return rawData;
+}
+
+</script>
+</body>
+</html>

@@ -3,9 +3,11 @@ from utils.dte_scraper import *
 from utils.blogs import *
 from flask import url_for
 
+from utils.db import get_db
+import pandas as pd
+import numpy as np
 # Configure application
 app = Flask(__name__)
-
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -19,7 +21,15 @@ def fetch_news():
 
 @app.route('/contact_us', methods=['POST', 'GET'])
 def contact_us():
-    return render_template('/contact.html')
+    countries = []
+    df = pd.read_csv("data.csv",error_bad_lines=False, delimiter=";")
+    f = np.array(df)
+    data = {}
+    for i in f:
+        countries.append(i[0])
+        data[i[0]] ={"Coal":i[1],"Gas":i[2],"Oil":i[3],"Hydro":i[4], "Renewable":i[5],"Nuclear":i[6]}
+    # print(data)
+    return render_template('/contact.html', con=countries, data=data)
 
 @app.route('/about', methods=['POST', 'GET'])
 def about():
