@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset ="UTF-8">
-    <title> ALTER - Make a change </title>
-    <link rel="stylesheet" href="style.css">
-    
-</head>
+{% extends "layout.html" %}
 
-<body>
+
+{% block body %}
 <section id="header">
      <div class="topnav">
-  <a href="index.html">Home</a>
-  <a href="news.html">News</a>
-  <a href="contact.html">Contact</a>
-  <a class="active" href="#about">About</a>
+  <a href="/">Home</a>
+  <a href="/fetch_news">News</a>
+  <a href="/contact_us">Contact</a>
+  <a class="active" href="/about">About</a>
      </div>
      <div class = "container">
         <div class="about-text">
@@ -49,3 +43,4 @@
         
 
     </section>
+{% endblock %}
