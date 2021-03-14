@@ -5,10 +5,8 @@
 }
 #header {
     height : 100vh;
-    background-image: url(images/bg%20-%20Copy.jpg);
-    /*background-position:; */
-   background-size: cover;
-
+    background-image: url(https://res.cloudinary.com/graystack/image/upload/v1615714996/upload/bggg_ibblzb.jpg);
+    background-size: cover;
 }
 .container {
     margin-right: 100px;
