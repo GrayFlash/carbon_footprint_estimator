@@ -2,11 +2,14 @@ from flask import Flask, render_template, redirect, flash, request
 from utils.dte_scraper import *
 from utils.blogs import *
 from flask import url_for
+from flask_cors import CORS
+
 import pandas as pd
 import numpy as np
+
 # Configure application
 app = Flask(__name__)
-
+CORS(app)
 @app.route('/', methods=['POST', 'GET'])
 def index():
     return render_template('/index.html')
@@ -55,3 +58,7 @@ def blogs_read():
 @app.route('/blog_create',methods=['POST','GET'])
 def blogs_create():
     return render_template('/blog_create.html')
+
+
+if __name__ == '__main__':
+    app.run()
