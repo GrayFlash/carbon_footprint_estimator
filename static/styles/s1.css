@@ -1,0 +1,35 @@
+.news_block {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    height: 250px;
+    margin: auto;
+    gap: 3%;
+ }
+ 
+.article_title {
+  text-decoration: none;
+  color: black
+}
+
+.img {
+    height: 100%;
+    width: 100%
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+}
+
+.date_posted {
+ align-self:flex-end
+}
+
+@media screen and (max-width: 822px) {
+  .news_block {
+    flex-direction:column;
+    max-width: 70%;
+  }
+}

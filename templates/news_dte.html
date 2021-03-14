@@ -8,37 +8,46 @@
         <a href="/about">About</a>
     </div>
 
-    <h1>News Related to Climate Changes</h1>
+    <div class="Content">
+        <br>
+        <br>
+        <h1>News Related to Climate Changes</h1>
+        <br>
+        <br>
+        <ul>
+            {% for news_block in news_list %}
+                <li>
+                    <div class="news_block">
 
-    <ul>
-        {% for news_block in news_list %}
-            <li>
-                <div class="img">
-                    <img src="{{ news_block['img'] }}">
-                </div>
-                <div class="details">
-                    <a href="{{ news_block['href'] }}">
-                        <h5>
-                            {{ news_block['title'] }}
-                        </h5>
-                    </a>
-                    <p>
-                        
-                        {{ news_block['descr'] }}
-                    </p>
-
-                    <div class="info">
-                        Posted on: 
-                        {{ news_block['date'] }}
+                        <div class="img">
+                            <img src="{{ news_block['img'] }}">
+                        </div>
+                        <div class="details">
+                            <a class="article_title" href="{{ news_block['href'] }}">
+                                <h3>
+                                    {{ news_block['title'] }}
+                                </h3>
+                            </a>
+                            <p>
+                                
+                                {{ news_block['descr'] }}
+                            </p>
+        
+                            <div class="date_posted">
+                                Posted on: 
+                                {{ news_block['date'] }}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-        {% endfor %}
-    </ul>
+                </li>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            {% endfor %}
+        </ul>
+    </div>
+    
 {%endblock %}
